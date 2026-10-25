@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import ProductList from './ProductList';
 import CartItem from './CartItem';
@@ -18,13 +18,19 @@ import { useSelector } from 'react-redux';
 
 export function LandingPage() {
   const navigate = useNavigate();
+  const [showProductList, setShowProductList] = useState(false);
   const cartItems = useSelector((state) => state.cart?.items || []);
   const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
 
   const handleGetStarted = () => {
+    setShowProductList(true);
     navigate('/plants');
   };
   const handleGetStartedClick = handleGetStarted;
+
+  if (showProductList) {
+    return <ProductList />;
+  }
 
   return (
     <div className="landing-page-hero landing-page background-image">
@@ -86,7 +92,7 @@ export function LandingPage() {
               type="button"
               id="get-started-btn"
               className="btn-get-started get-started-button"
-              onClick={handleGetStartedClick}
+              onClick={handleGetStarted}
             >
               <span>Get Started</span>
               <ArrowRight size={20} className="cta-arrow-icon" />

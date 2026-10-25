@@ -11,8 +11,8 @@ export default function Navbar() {
   const totalQuantity = cartItems.reduce((total, item) => total + (item.quantity || 0), 0);
 
   return (
-    <header className="navbar-header">
-      <nav className="navbar-container" aria-label="Main Navigation">
+    <header className="navbar-header navbar">
+      <nav className="navbar navbar-container" aria-label="Main Navigation">
         {/* Brand Section */}
         <Link to="/" className="navbar-brand">
           <div className="brand-icon-wrapper">

@@ -75,13 +75,13 @@ export default function CartItem({ onContinueShopping }) {
         })
       );
     } else {
-      dispatch(removeItem(item.id ?? item.name));
+      dispatch(removeItem(item.name));
     }
   };
 
-  // Delete item completely from cart using removeItem
+  // Delete item completely from cart using removeItem(item.name)
   const handleRemove = (item) => {
-    dispatch(removeItem(item.id ?? item.name));
+    dispatch(removeItem(item.name));
   };
 
   // Continue shopping navigation (supports both router and prop callback)
@@ -173,8 +173,8 @@ export default function CartItem({ onContinueShopping }) {
                     <div className="cart-item-info">
                       <span className="cart-item-category">{item.category}</span>
                       <h2 className="cart-item-name">{item.name}</h2>
-                      <div className="cart-item-unit-price">
-                        Unit Price: <strong>${Number(item.price).toFixed(2)}</strong>
+                      <div className="cart-item-unit-price cart-item-cost">
+                        Unit Price: <strong>{item.cost || `$${Number(item.price).toFixed(2)}`}</strong>
                       </div>
 
                       {/* Delete Button (Mobile) */}

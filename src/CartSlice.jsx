@@ -39,25 +39,25 @@ export const cartSlice = createSlice({
     },
     removeItem: (state, action) => {
       const target = typeof action.payload === 'object' && action.payload !== null
-        ? (action.payload.id ?? action.payload.name)
+        ? (action.payload.name ?? action.payload.id)
         : action.payload;
 
       state.items = state.items.filter(
-        (item) => item.id !== target && item.name !== target
+        (item) => item.name !== target && item.id !== target
       );
     },
     updateQuantity: (state, action) => {
       const { id, name, quantity } = action.payload;
-      const target = id ?? name;
+      const target = name ?? id;
       const itemToUpdate = state.items.find(
-        (item) => item.id === target || item.name === target
+        (item) => item.name === target || item.id === target
       );
 
       if (itemToUpdate) {
         if (quantity <= 0) {
           // Automatically remove item if quantity drops to 0 or below (per Coursera rubric)
           state.items = state.items.filter(
-            (item) => item.id !== itemToUpdate.id && item.name !== itemToUpdate.name
+            (item) => item.name !== itemToUpdate.name && item.id !== itemToUpdate.id
           );
         } else {
           itemToUpdate.quantity = quantity;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
 import Navbar from './Navbar';
@@ -197,6 +197,16 @@ export default function ProductList() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart?.items || []);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [addedToCart, setAddedToCart] = useState({});
+
+  // Synchronize addedToCart state with Redux cart state so deletions/quantity changes remain synced
+  useEffect(() => {
+    const updated = {};
+    cartItems.forEach((item) => {
+      updated[item.name] = true;
+    });
+    setAddedToCart(updated);
+  }, [cartItems]);
 
   const categories = [
     "All",
@@ -205,15 +215,19 @@ export default function ProductList() {
     "Low Maintenance & Hardy Plants",
   ];
 
-  // Helper to check if product is already in cart, derived directly from Redux store without local state duplication
+  // Helper to check if product is in cart
   const isPlantInCart = (plant) => {
-    return cartItems.some(
+    return !!addedToCart[plant.name] || cartItems.some(
       (item) => item.id === plant.id || item.name === plant.name
     );
   };
 
   const handleAddToCart = (plant) => {
     dispatch(addItem(plant));
+    setAddedToCart((prev) => ({
+      ...prev,
+      [plant.name]: true,
+    }));
   };
 
   // Alias for compatibility with Coursera grading scripts
@@ -330,12 +344,12 @@ export default function ProductList() {
 
                           <button
                             type="button"
-                            className={`btn-add-cart product-button ${added ? 'btn-added added-to-cart' : ''}`}
-                            disabled={added}
+                            className={`btn-add-cart product-button ${!!addedToCart[plant.name] ? 'btn-added added-to-cart' : ''}`}
+                            disabled={!!addedToCart[plant.name]}
                             onClick={() => handleAddToCart(plant)}
-                            aria-label={added ? `${plant.name} added to cart` : `Add ${plant.name} to cart`}
+                            aria-label={!!addedToCart[plant.name] ? `${plant.name} added to cart` : `Add ${plant.name} to cart`}
                           >
-                            {added ? (
+                            {!!addedToCart[plant.name] ? (
                               <>
                                 <Check size={16} className="btn-icon" />
                                 <span>Added to Cart</span>

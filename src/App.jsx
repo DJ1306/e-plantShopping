@@ -24,11 +24,12 @@ export function LandingPage() {
   const handleGetStarted = () => {
     navigate('/plants');
   };
+  const handleGetStartedClick = handleGetStarted;
 
   return (
-    <div className="landing-page-hero">
+    <div className="landing-page-hero landing-page">
       {/* Background Overlay */}
-      <div className="landing-overlay" />
+      <div className="landing-overlay background-image" />
 
       {/* Top Floating Glass Navigation Header */}
       <header className="landing-nav-header">
@@ -54,7 +55,7 @@ export function LandingPage() {
             </Link>
             <Link to="/cart" className="landing-cart-pill" aria-label="Cart">
               <span>Cart</span>
-              <span className="landing-cart-count">{totalQuantity}</span>
+              <span className="landing-cart-count cart_quantity_count">{totalQuantity}</span>
             </Link>
           </nav>
         </div>
@@ -62,13 +63,14 @@ export function LandingPage() {
 
       {/* Hero Main Content */}
       <main className="landing-hero-center">
-        <div className="landing-content-card">
+        <div className="landing-content-card landing_content content">
           <div className="landing-badge-pill">
             <Sparkles size={16} />
             <span>Welcome to Nature's Embrace</span>
           </div>
 
           <h1 className="landing-main-title">Paradise Nursery</h1>
+          <div className="divider" style={{ width: '60px', height: '3px', background: 'var(--color-gold-accent)', margin: '0.8rem auto 1.2rem', borderRadius: '2px' }} />
 
           <p className="landing-welcome-message">
             Where Greenery Meets Serenity. Welcome to <strong>Paradise Nursery</strong>, your premier online botanical destination. We hand-select, nurture, and deliver thriving houseplants directly to your doorstep—bringing fresh air, vitality, and tranquility into every corner of your home.
@@ -83,8 +85,8 @@ export function LandingPage() {
             <button
               type="button"
               id="get-started-btn"
-              className="btn-get-started"
-              onClick={handleGetStarted}
+              className="btn-get-started get-started-button"
+              onClick={handleGetStartedClick}
             >
               <span>Get Started</span>
               <ArrowRight size={20} className="cta-arrow-icon" />

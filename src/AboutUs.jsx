@@ -14,11 +14,11 @@ import {
   Truck
 } from 'lucide-react';
 
-export default function AboutUs() {
+export default function AboutUs({ showNavbar = true }) {
   return (
-    <div className="about-page-wrapper">
-      {/* Shared Navigation Bar */}
-      <Navbar />
+    <div className="about-page-wrapper about-us-container">
+      {/* Shared Navigation Bar (optional if embedded) */}
+      {showNavbar && <Navbar />}
 
       <main className="about-main-container">
         {/* Hero Section */}
@@ -27,9 +27,9 @@ export default function AboutUs() {
             <Sprout size={16} />
             <span>Cultivating Joy &amp; Purity</span>
           </div>
-          <h1 className="about-hero-title">About Paradise Nursery</h1>
-          <p className="about-hero-lead">
-            Where botanical passion meets modern homes. We are dedicated to connecting plant lovers with robust, nursery-grown houseplants that purify your air and elevate your sanctuary.
+          <h1 className="about-hero-title about-us-heading">About Paradise Nursery</h1>
+          <p className="about-hero-lead about-us-description">
+            Welcome to Paradise Nursery, where green meets serenity! We are passionate about bringing nature closer to you.
           </p>
         </section>
 
@@ -39,11 +39,17 @@ export default function AboutUs() {
             <div className="about-story-content">
               <span className="section-eyebrow">Our Story</span>
               <h2 className="section-title">Rooted in Passion for Living Greenery</h2>
-              <p className="about-text-paragraph">
-                Founded by lifelong botanists and indoor plant enthusiasts, <strong>Paradise Nursery</strong> began with a simple observation: modern indoor spaces often lack the rejuvenating calm and clean air that living plants naturally provide. What started as an artisanal greenhouse has flourished into a nationwide collective of master horticulturalists.
+              
+              <p className="about-text-paragraph about-us-content">
+                Welcome to Paradise Nursery, where green meets serenity! At Paradise Nursery, we are passionate about bringing nature closer to you. Our mission is to provide a wide range of high-quality plants that not only enhance the beauty of your surroundings but also contribute to a healthier and more sustainable lifestyle. From air-purifying plants to aromatic fragrant ones, we have something for every plant enthusiast.
               </p>
-              <p className="about-text-paragraph">
-                We believe that every home—no matter how cozy or sunlit—deserves the timeless warmth of lush, thriving green leaves. From air-cleansing Snake Plants to fragrant Arabian Jasmine and forgiving ZZ Plants, each botanical specimen in our catalog is hand-selected to bring natural wellness into your everyday routine.
+              
+              <p className="about-text-paragraph about-us-content">
+                Our team of experts is dedicated to ensuring that each plant meets our strict standards of quality and care. Whether you're a seasoned gardener or just starting your green journey, we're here to support you every step of the way. Feel free to explore our collection, ask questions, and let us help you find the perfect plant for your home or office.
+              </p>
+
+              <p className="about-text-paragraph about-us-content">
+                Join us in our mission to create a greener, healthier world. Visit Paradise Nursery today and experience the beauty of nature right at your doorstep.
               </p>
 
               <div className="about-highlights-list">

@@ -54,7 +54,7 @@ export default function Navbar() {
           <Link to="/cart" className="navbar-cart-btn" aria-label="View Shopping Cart">
             <div className="cart-icon-container">
               <ShoppingBag size={22} className="cart-svg-icon" />
-              <span className="cart-badge" data-testid="cart-badge">
+              <span className="cart-badge cart_quantity_count" data-testid="cart-badge">
                 {totalQuantity}
               </span>
             </div>

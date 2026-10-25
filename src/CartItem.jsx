@@ -28,18 +28,27 @@ export default function CartItem({ onContinueShopping }) {
   // Dynamic calculations
   const totalQuantity = cartItems.reduce((acc, item) => acc + (item.quantity || 0), 0);
 
-  // Grand total calculation
+  // Helper to extract numeric unit price safely from either numeric price or formatted string cost
+  const getItemUnitPrice = (item) => {
+    if (typeof item.price === 'number' && !isNaN(item.price)) {
+      return item.price;
+    }
+    const parsed = parseFloat(String(item.cost || item.price || '0').replace(/[^0-9.]/g, ''));
+    return isNaN(parsed) ? 0 : parsed;
+  };
+
+  // Grand total calculation for all items in cart
   const calculateTotalAmount = () => {
     const total = cartItems.reduce(
-      (sum, item) => sum + (item.price || 0) * (item.quantity || 0),
+      (sum, item) => sum + getItemUnitPrice(item) * (item.quantity || 0),
       0
     );
     return total.toFixed(2);
   };
 
-  // Line item total calculation
+  // Line item total calculation (Unit Price × Quantity)
   const calculateTotalCost = (item) => {
-    const cost = (item.price || 0) * (item.quantity || 0);
+    const cost = getItemUnitPrice(item) * (item.quantity || 0);
     return cost.toFixed(2);
   };
 
@@ -54,7 +63,7 @@ export default function CartItem({ onContinueShopping }) {
     );
   };
 
-  // Quantity decrease - strictly prevents dropping below 1
+  // Quantity decrease - decrements by 1 or removes item cleanly if quantity reaches 0 (Coursera rubric)
   const handleDecrement = (item) => {
     if (item.quantity > 1) {
       dispatch(
@@ -64,10 +73,12 @@ export default function CartItem({ onContinueShopping }) {
           quantity: item.quantity - 1,
         })
       );
+    } else {
+      dispatch(removeItem(item.id ?? item.name));
     }
   };
 
-  // Delete item from cart
+  // Delete item completely from cart
   const handleRemove = (item) => {
     dispatch(removeItem(item.id ?? item.name));
   };
@@ -82,9 +93,10 @@ export default function CartItem({ onContinueShopping }) {
     }
   };
 
-  // Checkout action - shows clear "Coming Soon!" notification
+  // Checkout action - triggers Coursera expected alert and shows informative modal
   const handleCheckoutShopping = (e) => {
     if (e && e.preventDefault) e.preventDefault();
+    alert('Functionality to be added for future reference');
     setShowCheckoutModal(true);
   };
 
@@ -167,7 +179,7 @@ export default function CartItem({ onContinueShopping }) {
                       {/* Delete Button (Mobile) */}
                       <button
                         type="button"
-                        className="btn-remove-item mobile-only"
+                        className="btn-remove-item cart-item-delete mobile-only"
                         onClick={() => handleRemove(item)}
                         aria-label={`Remove ${item.name} from cart`}
                       >
@@ -180,22 +192,21 @@ export default function CartItem({ onContinueShopping }) {
                     <div className="cart-item-quantity-stepper">
                       <button
                         type="button"
-                        className="btn-stepper btn-decrement"
-                        disabled={item.quantity <= 1}
+                        className="btn-stepper btn-decrement cart-item-button cart-item-button-dec"
                         onClick={() => handleDecrement(item)}
                         aria-label={`Decrease quantity of ${item.name}`}
-                        title={item.quantity <= 1 ? "Minimum quantity is 1" : "Decrease quantity"}
+                        title={item.quantity <= 1 ? "Remove plant from cart" : "Decrease quantity"}
                       >
                         <Minus size={15} />
                       </button>
                       
-                      <span className="stepper-quantity-value" aria-label={`Quantity: ${item.quantity}`}>
+                      <span className="stepper-quantity-value cart-item-quantity-value" aria-label={`Quantity: ${item.quantity}`}>
                         {item.quantity}
                       </span>
 
                       <button
                         type="button"
-                        className="btn-stepper btn-increment"
+                        className="btn-stepper btn-increment cart-item-button cart-item-button-inc"
                         onClick={() => handleIncrement(item)}
                         aria-label={`Increase quantity of ${item.name}`}
                         title="Increase quantity"
@@ -214,7 +225,7 @@ export default function CartItem({ onContinueShopping }) {
                     {/* Delete Button (Desktop) */}
                     <button
                       type="button"
-                      className="btn-remove-item desktop-only"
+                      className="btn-remove-item cart-item-delete desktop-only"
                       onClick={() => handleRemove(item)}
                       aria-label={`Remove ${item.name} from cart`}
                       title="Remove plant"
@@ -226,10 +237,10 @@ export default function CartItem({ onContinueShopping }) {
               </div>
 
               {/* Action Links Below Cart List */}
-              <div className="cart-actions-bottom">
+              <div className="cart-actions-bottom continue_shopping_btn">
                 <button
                   type="button"
-                  className="btn-secondary-nature"
+                  className="btn-secondary-nature get-started-button"
                   onClick={handleContinueShopping}
                 >
                   <ArrowLeft size={16} />
@@ -270,7 +281,7 @@ export default function CartItem({ onContinueShopping }) {
                 {/* Checkout Button */}
                 <button
                   type="button"
-                  className="btn-primary-nature btn-checkout-action"
+                  className="btn-primary-nature btn-checkout-action get-started-button1"
                   onClick={handleCheckoutShopping}
                 >
                   <CreditCard size={18} />

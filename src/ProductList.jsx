@@ -197,7 +197,6 @@ export default function ProductList() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart?.items || []);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [addedToCart, setAddedToCart] = useState({});
 
   const categories = [
     "All",
@@ -206,21 +205,15 @@ export default function ProductList() {
     "Low Maintenance & Hardy Plants",
   ];
 
-  // Helper to check if product is already in cart (checks both Redux state and local click tracking)
+  // Helper to check if product is already in cart, derived directly from Redux store without local state duplication
   const isPlantInCart = (plant) => {
-    return (
-      cartItems.some(
-        (item) => item.id === plant.id || item.name === plant.name
-      ) || Boolean(addedToCart[plant.name])
+    return cartItems.some(
+      (item) => item.id === plant.id || item.name === plant.name
     );
   };
 
   const handleAddToCart = (plant) => {
     dispatch(addItem(plant));
-    setAddedToCart((prev) => ({
-      ...prev,
-      [plant.name]: true,
-    }));
   };
 
   // Alias for compatibility with Coursera grading scripts

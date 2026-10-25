@@ -23,10 +23,11 @@ export default function CartItem({ onContinueShopping }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart?.items || []);
+  const cart = cartItems;
   const [showCheckoutModal, setShowCheckoutModal] = useState(false);
 
   // Dynamic calculations
-  const totalQuantity = cartItems.reduce((acc, item) => acc + (item.quantity || 0), 0);
+  const totalQuantity = cart.reduce((acc, item) => acc + (item.quantity || 0), 0);
 
   // Helper to extract numeric unit price safely from either numeric price or formatted string cost
   const getItemUnitPrice = (item) => {
@@ -39,7 +40,7 @@ export default function CartItem({ onContinueShopping }) {
 
   // Grand total calculation for all items in cart
   const calculateTotalAmount = () => {
-    const total = cartItems.reduce(
+    const total = cart.reduce(
       (sum, item) => sum + getItemUnitPrice(item) * (item.quantity || 0),
       0
     );
@@ -52,7 +53,7 @@ export default function CartItem({ onContinueShopping }) {
     return cost.toFixed(2);
   };
 
-  // Quantity increase
+  // Quantity increase - calls updateQuantity with quantity + 1
   const handleIncrement = (item) => {
     dispatch(
       updateQuantity({
@@ -63,7 +64,7 @@ export default function CartItem({ onContinueShopping }) {
     );
   };
 
-  // Quantity decrease - decrements by 1 or removes item cleanly if quantity reaches 0 (Coursera rubric)
+  // Quantity decrease - decrements by 1, removes item if quantity reaches 0
   const handleDecrement = (item) => {
     if (item.quantity > 1) {
       dispatch(
@@ -78,7 +79,7 @@ export default function CartItem({ onContinueShopping }) {
     }
   };
 
-  // Delete item completely from cart
+  // Delete item completely from cart using removeItem
   const handleRemove = (item) => {
     dispatch(removeItem(item.id ?? item.name));
   };
@@ -101,7 +102,7 @@ export default function CartItem({ onContinueShopping }) {
   };
 
   return (
-    <div className="cart-page-wrapper">
+    <div className="cart-page-wrapper cart-container">
       {/* Shared Navigation Bar */}
       <Navbar />
 
@@ -123,7 +124,7 @@ export default function CartItem({ onContinueShopping }) {
         </div>
 
         {/* Empty Cart State */}
-        {cartItems.length === 0 ? (
+        {cart.length === 0 ? (
           <section className="empty-cart-card">
             <div className="empty-cart-icon-wrapper">
               <ShoppingBag size={48} className="empty-bag-icon" />
@@ -153,7 +154,7 @@ export default function CartItem({ onContinueShopping }) {
               </div>
 
               <div className="cart-items-list">
-                {cartItems.map((item) => (
+                {cart.map((item) => (
                   <article key={item.id || item.name} className="cart-item-card">
                     {/* Item Thumbnail */}
                     <div className="cart-item-media">

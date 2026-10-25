@@ -1,11 +1,11 @@
-# Paradise Nursery Shopping Application
+# e-plantShopping — Paradise Nursery Shopping Application
 
 [![React](https://img.shields.io/badge/React-18-blue.svg)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-6-purple.svg)](https://vitejs.dev/)
 [![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-2-purple.svg)](https://redux-toolkit.js.org/)
 [![Status](https://img.shields.io/badge/Status-Complete%20%26%20Tested-brightgreen.svg)]()
 
-A modern, responsive e-commerce web application for plant enthusiasts, crafted with **React 18**, **Redux Toolkit**, and **Vite**. Built as part of the Coursera / IBM Front-End Developer Capstone Project.
+**e-plantShopping** is a modern, responsive plant shopping web application crafted for **Paradise Nursery Shopping Application** with **React 18**, **Redux Toolkit**, and **Vite**. Built as part of the Coursera / IBM Front-End Developer Capstone Project.
 
 ---
 
@@ -128,19 +128,19 @@ npm run preview
 
 ## 📝 Assignment Submission URLs Reference
 
-For Coursera project grading, submit the direct GitHub URLs to the following required project files:
+For Coursera project grading, submit the direct GitHub URLs to the following required project files in the `e-plantShopping` repository:
 
-1. **`README.md`**: `https://github.com/<username>/paradise-nursery/blob/main/README.md`
-2. **`src/AboutUs.jsx`**: `https://github.com/<username>/paradise-nursery/blob/main/src/AboutUs.jsx`
-3. **`src/App.css`**: `https://github.com/<username>/paradise-nursery/blob/main/src/App.css`
-4. **`src/App.jsx`**: `https://github.com/<username>/paradise-nursery/blob/main/src/App.jsx`
-5. **`src/CartSlice.jsx`**: `https://github.com/<username>/paradise-nursery/blob/main/src/CartSlice.jsx`
-6. **`src/ProductList.jsx`**: `https://github.com/<username>/paradise-nursery/blob/main/src/ProductList.jsx`
-7. **`src/CartItem.jsx`**: `https://github.com/<username>/paradise-nursery/blob/main/src/CartItem.jsx`
+1. **`README.md`**: `https://github.com/DJ1306/e-plantShopping/blob/main/README.md`
+2. **`src/AboutUs.jsx`**: `https://github.com/DJ1306/e-plantShopping/blob/main/src/AboutUs.jsx`
+3. **`src/App.css`**: `https://github.com/DJ1306/e-plantShopping/blob/main/src/App.css`
+4. **`src/App.jsx`**: `https://github.com/DJ1306/e-plantShopping/blob/main/src/App.jsx`
+5. **`src/CartSlice.jsx`**: `https://github.com/DJ1306/e-plantShopping/blob/main/src/CartSlice.jsx`
+6. **`src/ProductList.jsx`**: `https://github.com/DJ1306/e-plantShopping/blob/main/src/ProductList.jsx`
+7. **`src/CartItem.jsx`**: `https://github.com/DJ1306/e-plantShopping/blob/main/src/CartItem.jsx`
 
 Additional state and root files:
-- **`src/store.js`**: `https://github.com/<username>/paradise-nursery/blob/main/src/store.js`
-- **`src/main.jsx`**: `https://github.com/<username>/paradise-nursery/blob/main/src/main.jsx`
+- **`src/store.js`**: `https://github.com/DJ1306/e-plantShopping/blob/main/src/store.js`
+- **`src/main.jsx`**: `https://github.com/DJ1306/e-plantShopping/blob/main/src/main.jsx`
 
 ---
 

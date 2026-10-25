@@ -27,9 +27,9 @@ export function LandingPage() {
   const handleGetStartedClick = handleGetStarted;
 
   return (
-    <div className="landing-page-hero landing-page">
+    <div className="landing-page-hero landing-page background-image">
       {/* Background Overlay */}
-      <div className="landing-overlay background-image" />
+      <div className="landing-overlay" />
 
       {/* Top Floating Glass Navigation Header */}
       <header className="landing-nav-header">
@@ -69,7 +69,7 @@ export function LandingPage() {
             <span>Welcome to Nature's Embrace</span>
           </div>
 
-          <h1 className="landing-main-title">Paradise Nursery</h1>
+          <h1 className="landing-main-title">Welcome To Paradise Nursery</h1>
           <div className="divider" style={{ width: '60px', height: '3px', background: 'var(--color-gold-accent)', margin: '0.8rem auto 1.2rem', borderRadius: '2px' }} />
 
           <p className="landing-welcome-message">

@@ -237,6 +237,17 @@ button {
    Full-screen visible botanical background + readable overlay + contrast
    ========================================================================== */
 
+.background-image {
+  background-color: var(--color-forest-dark);
+  background-image: url('https://images.unsplash.com/photo-1470058869958-2a77ade41c02?auto=format&fit=crop&w=2000&q=85');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  width: 100%;
+}
+
 .landing-page-hero {
   position: relative;
   min-height: 100vh;
@@ -839,7 +850,8 @@ button {
    TASK 7 - SHOPPING CART STYLES (CARTITEM.JSX)
    ========================================================================== */
 
-.cart-page-wrapper {
+.cart-page-wrapper,
+.cart-container {
   min-height: 100vh;
   background-color: var(--color-cream-bg);
 }
